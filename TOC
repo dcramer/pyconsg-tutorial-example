@@ -1,0 +1,58 @@
+Build a Blog
+- Flask
+- Angular.js
+- Python 3
+- SQLite
+
+Features:
+- List of posts
+- Post archives
+- View/Edit/Delete posts
+- REST API
+
+##
+
+- intro to bower
+- basic framework (static media, angular config)
+- basic deps (bootstrap/angular)
+
+##
+
+- setup post model
+- setup post list endpoint
+- setup index controller
+- tests for index controller
+
+##
+
+- add create post endpoint
+- add create post controller
+- tests for post controller
+
+##
+
+- partials serve
+- move index controller logic into external
+
+##
+
+- add post details endpoint
+- add post details controller
+- tests for post details controller
+
+##
+
+- add edit post endpoint
+- add edit post controller
+- tests for edit post controller
+
+## add time since
+
+- add moment.js to bower
+- add time-since filter
+
+## ???
+
+- asyncio / pub/sub / event source
+- require.js / build dir / versions
+- angular-raven
