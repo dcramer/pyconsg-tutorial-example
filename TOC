@@ -51,8 +51,9 @@ Features:
 - add moment.js to bower
 - add time-since filter
 
-## ???
+## additional depending on time (ordered by importance)
 
-- asyncio / pub/sub / event source
 - require.js / build dir / versions
 - angular-raven
+- asyncio / pub/sub / event source
+- auth via google auth
