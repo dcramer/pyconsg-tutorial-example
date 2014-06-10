@@ -31,6 +31,10 @@ Features:
 
 ##
 
+- setup api connector for post endpoints
+
+##
+
 - partials serve
 - move index controller logic into external
 
@@ -53,6 +57,7 @@ Features:
 
 ## additional depending on time (ordered by importance)
 
+- ui-router
 - require.js / build dir / versions
 - angular-raven
 - asyncio / pub/sub / event source
