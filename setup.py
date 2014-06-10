@@ -32,7 +32,7 @@ setup(
     version='0.0.0',
     description='',
     long_description=__doc__,
-    packages=find_packages('blog'),
+    packages=find_packages(),
     zip_safe=False,
     install_requires=install_requires,
     extras_require={'tests': tests_require},

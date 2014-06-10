@@ -19,6 +19,9 @@ sentry = Sentry(logging=True, level=logging.ERROR)
 
 def create_app(**config):
     app = Flask(__name__)
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/blog.db'
+
     app.config.update(config)
 
     api.init_app(app)
@@ -27,6 +30,8 @@ def create_app(**config):
 
     configure_web_routes(app)
     configure_api_routes(app)
+
+    return app
 
 
 def configure_web_routes(app):
@@ -39,11 +44,11 @@ def configure_web_routes(app):
 
 
 def configure_api_routes(app):
-    from .api.post_details import PostDetailsEndpoint
-    from .api.post_index import PostIndexEndpoint
+    from .api.post_details import PostDetailsResource
+    from .api.post_index import PostIndexResource
 
-    api.add_resource(PostIndexEndpoint, '/posts/')
-    api.add_resource(PostDetailsEndpoint, '/posts/<int:post_id>/')
+    api.add_resource(PostIndexResource, '/posts/')
+    api.add_resource(PostDetailsResource, '/posts/<int:post_id>/')
 
 
 if __name__ == '__main__':
