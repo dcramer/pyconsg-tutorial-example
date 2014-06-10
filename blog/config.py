@@ -1,4 +1,5 @@
 import logging
+import os
 import warnings
 
 from flask import Flask
@@ -6,6 +7,8 @@ from flask.ext.restful import Api
 from flask.ext.sqlalchemy import SQLAlchemy
 from raven.contrib.flask import Sentry
 from sqlalchemy.exc import SAWarning
+
+from blog.constants import PROJECT_ROOT
 
 # ensure sqlalchemy warnings bubble up to errors
 warnings.simplefilter('error', SAWarning)
@@ -18,7 +21,10 @@ sentry = Sentry(logging=True, level=logging.ERROR)
 
 
 def create_app(**config):
-    app = Flask(__name__)
+    app = Flask(
+        __name__,
+        template_folder=os.path.join(PROJECT_ROOT, 'templates')
+    )
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/blog.db'
 
