@@ -22,7 +22,7 @@ def web(addr):
     port = int(port)
     addr = '{0}:{1}'.format(host, port)
 
-    app = create_app(SERVER_NAME=addr)
+    app = create_app()
 
     print("Listening on http://{0}".format(addr))
     app.run(host, port)
