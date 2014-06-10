@@ -23,7 +23,8 @@ sentry = Sentry(logging=True, level=logging.ERROR)
 def create_app(**config):
     app = Flask(
         __name__,
-        template_folder=os.path.join(PROJECT_ROOT, 'templates')
+        static_folder=os.path.join(PROJECT_ROOT, 'static'),
+        template_folder=os.path.join(PROJECT_ROOT, 'templates'),
     )
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/blog.db'
