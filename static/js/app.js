@@ -6,5 +6,9 @@ var blogApp = angular.module('blog', [
     .when('/', {
       templateUrl: 'post-list.html',
       controller: 'PostListCtrl'
+    })
+    .when('/posts/:post_id', {
+      templateUrl: 'post-details.html',
+      controller: 'PostDetailsCtrl'
     });
 }]);
