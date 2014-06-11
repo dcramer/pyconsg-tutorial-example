@@ -7,10 +7,20 @@ var blogApp = angular.module('blog', [
   $routeProvider
     .when('/', {
       templateUrl: 'post-list.html',
-      controller: 'PostListCtrl'
+      controller: 'PostListCtrl',
+      resolve: {
+        postListResponse: function($http) {
+          return $http.get('/api/0/posts/');
+        }
+      }
     })
     .when('/posts/:post_id', {
       templateUrl: 'post-details.html',
-      controller: 'PostDetailsCtrl'
+      controller: 'PostDetailsCtrl',
+      resolve: {
+        postDetailsResponse: function($http, $routeParams) {
+          return $http.get('/api/0/posts/' + $routeParams.post_id + '/');
+        }
+      }
     });
 }]);

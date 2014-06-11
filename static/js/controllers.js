@@ -1,15 +1,9 @@
 'use strict';
 
 angular.module('blog.controllers', ['ngRoute'])
-  .controller('PostListCtrl', function($http, $scope){
-    $http.get('/api/0/posts/')
-      .success(function(data){
-        $scope.postList = data;
-      });
+  .controller('PostListCtrl', function($scope, postListResponse){
+    $scope.postList = postListResponse.data;
   })
-  .controller('PostDetailsCtrl', function($http, $routeParams, $scope){
-    $http.get('/api/0/posts/' + $routeParams.post_id + '/')
-      .success(function(data){
-        $scope.post = data;
-      });
+  .controller('PostDetailsCtrl', function($scope, postDetailsResponse){
+    $scope.post = postDetailsResponse.data;
   });

@@ -12,7 +12,6 @@ describe('blog', function() {
       browser.get('/#/');
     });
 
-
     it('should render the post list', function() {
       expect(element.all(by.css('[ng-view] h1')).first().getText()).
         toMatch(/Posts/);
