@@ -1,4 +1,6 @@
-angular.module('blog.controllers', [])
+'use strict';
+
+angular.module('blog.controllers', ['ngRoute'])
   .controller('PostListCtrl', function($http, $scope){
     $http.get('/api/0/posts/')
       .success(function(data){

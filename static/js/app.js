@@ -1,3 +1,5 @@
+'use strict';
+
 var blogApp = angular.module('blog', [
   'ngRoute',
   'blog.controllers'
