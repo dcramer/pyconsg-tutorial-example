@@ -28,6 +28,7 @@ def create_app(**config):
     )
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/blog.db'
+    app.config['DEBUG'] = True
 
     app.config.update(config)
 
