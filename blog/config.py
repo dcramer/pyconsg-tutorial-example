@@ -35,8 +35,8 @@ def create_app(**config):
     db.init_app(app)
     sentry.init_app(app)
 
-    configure_web_routes(app)
     configure_api_routes(app)
+    configure_web_routes(app)
 
     return app
 
@@ -55,7 +55,7 @@ def configure_api_routes(app):
     from .api.post_index import PostIndexResource
 
     api.add_resource(PostIndexResource, '/posts/')
-    api.add_resource(PostDetailsResource, '/posts/<int:post_id>/')
+    api.add_resource(PostDetailsResource, '/posts/<post_id>/')
 
 
 if __name__ == '__main__':

@@ -21,7 +21,9 @@ class PostIndexResource(Resource):
         start = page * limit
         end = start + limit
 
-        post_list = Post.query.all()[start:end]
+        post_list = Post.query.order_by(
+            Post.pub_date.desc()
+        )[start:end]
 
         results = []
         for post in post_list:

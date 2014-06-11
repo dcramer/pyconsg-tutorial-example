@@ -4,8 +4,6 @@
 def main():
     from blog.config import create_app, db
 
-    import blog.models  # force model registration
-
     app = create_app()
     with app.app_context():
         db.create_all()

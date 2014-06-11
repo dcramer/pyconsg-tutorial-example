@@ -8,12 +8,10 @@ from setuptools import setup, find_packages
 
 tests_require = [
     'flake8>=2.1.0,<2.2.0',
-    'mercurial>=2.4',
     'mock>=1.0.1,<1.1.0',
     'pytest>=2.5.0,<2.6.0',
     'pytest-cov>=1.6,<1.7',
     'pytest-xdist>=1.9,<1.10',
-    'responses>=0.2.0,<0.3.0',
 ]
 
 install_requires = [

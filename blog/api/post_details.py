@@ -10,6 +10,9 @@ class PostDetailsResource(Resource):
         """
         Return information about a given post.
         """
+        if not post_id.isdigit():
+            return '', 404
+
         post = Post.query.get(post_id)
         if post is None:
             return '', 404
