@@ -15,7 +15,8 @@
     <form role="role" name="postForm" ng-submit="saveForm()">
       <div class="page-header">
         <div class="actions">
-          <a ng-click="saveForm()">Save</a>
+          <a ng-click="saveForm()" ng-hide="inSaveMode">Save</a>
+          <span ng-show="inSaveMode" class="spinner-icon"></span>
         </div>
         <input type="text"
                name="title"

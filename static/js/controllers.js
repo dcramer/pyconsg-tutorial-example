@@ -19,6 +19,7 @@ angular.module('blog.controllers', ['ngRoute'])
   .controller('PostDetailsCtrl', function($http, $scope, postDetailsResponse){
     $scope.formData = {};
     $scope.inEditMode = false;
+    $scope.inSaveMode = false;
     $scope.$watch('post', function(post){
       $scope.formData = {
         title: post.title,
@@ -29,6 +30,7 @@ angular.module('blog.controllers', ['ngRoute'])
     $scope.post = postDetailsResponse.data;
 
     $scope.saveForm = function(){
+      $scope.inSaveMode = true;
       $http({
         method: 'POST',
         url: '/api/0/posts/' + $scope.post.id + '/',
@@ -36,6 +38,10 @@ angular.module('blog.controllers', ['ngRoute'])
       }).success(function(data){
         $scope.post = data;
         $scope.inEditMode = false;
+      }).error(function(){
+        alert('We hit an issue trying to save your changes.');
+      }).finally(function(){
+        $scope.inSaveMode = false;
       });
     }
   });
