@@ -9,6 +9,7 @@ Setup the environment:
 Initialize the database:
 
 ::
+
 	bin/create-db
 
 
