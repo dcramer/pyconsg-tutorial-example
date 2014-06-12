@@ -27,6 +27,7 @@ def create_app(**config):
         template_folder=os.path.join(PROJECT_ROOT, 'templates'),
     )
 
+    app.config['INDUCE_API_DELAY'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/blog.db'
     app.config['DEBUG'] = True
 

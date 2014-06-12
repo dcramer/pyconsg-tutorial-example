@@ -15,6 +15,7 @@ from blog.config import create_app, db
 def app(request):
     app = create_app(
         SQLALCHEMY_DATABASE_URI='sqlite:///',
+        INDUCE_API_DELAY=False,
     )
     app_context = app.test_request_context()
     app_context.push()
