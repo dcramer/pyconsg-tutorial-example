@@ -54,7 +54,7 @@ def test_create_post(client):
         'title': title,
         'body': body,
     }, follow_redirects=True)
-    assert resp.status_code == 200
+    assert resp.status_code == 201
 
     data = json.loads(resp.data.decode('utf-8'))
 

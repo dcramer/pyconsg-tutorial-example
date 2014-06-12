@@ -53,4 +53,8 @@ class PostIndexResource(Resource):
         db.session.add(post)
         db.session.commit()
 
-        return {}, 301, {'Location': '/api/0/posts/{0}/'.format(post.id)}
+        return {
+            'id': post.id,
+            'title': post.title,
+            'pubDate': post.pub_date.isoformat(),
+        }, 201
