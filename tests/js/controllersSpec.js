@@ -20,17 +20,48 @@ describe('controllers', function(){
   });
 
   describe('NewPostCtrl', function(){
-    var scope, ctrl;
+    var $httpBackend, $scope, ctrl;
 
     beforeEach(inject(function($controller){
-        scope = {};
+        $scope = {};
 
-        ctrl = $controller('NewPostCtrl', {$scope: scope});
+        ctrl = $controller('NewPostCtrl', {$scope: $scope});
     }));
+
+    beforeEach(inject(function($injector){
+       $httpBackend = $injector.get('$httpBackend');
+       $httpBackend.when('POST', '/api/0/posts/').respond(samplePost);
+    }))
 
     it('should should be defined', function(){
       expect(ctrl).toBeDefined();
     });
+
+    it('should should bind formData', function(){
+      expect($scope.formData).toBeDefined();
+    });
+
+    it('should should support saveForm', function(){
+      expect($scope.saveForm).toBeDefined();
+
+      $scope.formData = {
+        title: samplePost.title,
+        body: samplePost.body
+      };
+
+      $httpBackend.expectPOST('/api/0/posts/', $scope.formData)
+        .respond(201, samplePost);
+
+      $scope.saveForm();
+
+      $httpBackend.flush();
+    });
+
+    afterEach(function() {
+      $httpBackend.verifyNoOutstandingExpectation();
+      $httpBackend.verifyNoOutstandingRequest();
+    });
+
   });
 
   describe('PostDetailsCtrl', function(){
