@@ -5,7 +5,8 @@ var blogApp = angular.module('blog', [
   'ngSanitize',
   'btford.markdown',
   'blog.controllers'
-]).config(['$routeProvider', function($routeProvider) {
+]).config(function($provide, $routeProvider) {
+  // wire up routes
   $routeProvider
     .when('/', {
       templateUrl: 'post-list.html',
@@ -29,4 +30,25 @@ var blogApp = angular.module('blog', [
       templateUrl: 'new-post.html',
       controller: 'NewPostCtrl'
     });
-}]);
+
+  // Create generic loading indicator
+  // http://stackoverflow.com/questions/17494732/how-to-make-a-loading-indicator-for-every-asynchronous-action-using-q-in-an-a
+  $provide.decorator('$q', function($delegate, $rootScope) {
+    var pendingPromisses = 0;
+    $rootScope.$watch(
+      function() { return pendingPromisses > 0; },
+      function(loading) { $rootScope.loading = loading; }
+    );
+    var $q = $delegate;
+    var origDefer = $q.defer;
+    $q.defer = function() {
+      var defer = origDefer();
+      pendingPromisses++;
+      defer.promise.finally(function() {
+        pendingPromisses--;
+      });
+      return defer;
+    };
+    return $q;
+  });
+});

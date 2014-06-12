@@ -32,13 +32,15 @@
     <![endif]-->
 
     <section class="container">
-      <h1><a href="/#/">My Blog</a></h1>
+      <header>
+        <h1><a href="/#/">My Blog</a></h1>
 
-      <section ng-view>
-        <div class="loading">
-          <div class="spinner-icon spinner-large"></div>
+        <div class="loading" ng-show="loading">
+          <div class="spinner-icon"></div>
         </div>
-      </section>
+      </header>
+
+      <section ng-view></section>
     </section>
   </body>
 </html>
