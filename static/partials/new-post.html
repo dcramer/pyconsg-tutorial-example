@@ -1,40 +1,28 @@
-<div class="page-header">
-  <h1>New Post</h1>
-</div>
-
-<form role="role" name="postForm">
-  <div class="form-group" ng-class="{error: !postForm.title.$valid}">
-    <input type="text"
-           name="title"
-           ng-model="formData.title"
-           placeholder="Post Title"
-           class="form-control"
-           required>
-
-    <div class="help-block">
-      <div ng-show="postForm.title.$dirty && postForm.title.$invalid">
-        <span ng-show="!!postForm.title.$error.required">This field is required.</span>
-      </div>
+<section class="post-details">
+  <form role="role" name="postForm" ng-submit="saveForm()">
+    <div class="page-header">
+      <input type="text"
+             name="title"
+             ng-model="formData.title"
+             placeholder="Post Title"
+             class="form-control"
+             ng-class="{error: !postForm.title.$valid}"
+             required>
     </div>
-  </div>
 
-  <div class="form-group" ng-class="{error: !postForm.body.$valid}">
     <textarea name="body"
               ng-model="formData.body"
               placeholder="Post Body"
               class="form-control"
+              ng-class="{error: !postForm.body.$valid}">
               required></textarea>
-
-    <div class="help-block">
-      <div ng-show="postForm.body.$dirty && postForm.body.$invalid">
-        <span ng-show="!!postForm.body.$error.required">This field is required.</span>
-      </div>
     </div>
-  </div>
 
   <div class="form-actions">
     <button class="btn btn-primary"
             ng-click="saveForm()"
-            ng-disabled="postForm.$invalid || postForm.$pristine">Save Changes</button>
+            ng-disabled="postForm.$invalid || postForm.$pristine">Publish</button>
   </div>
-</form>
+
+  </form>
+</section>

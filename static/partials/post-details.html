@@ -1,65 +1,15 @@
-<style>
-.post-details input[type=text],
-.post-details textarea {
-  color: #000;
-  background: #f9f9f9;
-  border: 0;
-  outline: 0;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 10px;
-  margin: -10px;
-}
-
-.post-details input[name=title],
-.post-details h1 {
-  font-size: 24px;
-  line-height: 30px;
-  font-weight: 300;
-  height: auto;
-  padding: 10px;
-  margin: 0 -10px;
-}
-.post-details input[name=title] {
-  margin-right: 0px;
-  line-height: 30px;
-}
-.post-details .page-header {
-  position: relative;
-}
-.post-details .page-header {
-  padding-right: 40px;
-}
-.post-details .page-header .actions {
-  position: absolute;
-  right: 0;
-  padding: 10px;
-  width: 50px;
-  text-align: right;
-  background: #fff;
-  line-height: 30px;
-}
-.post-details .page-header .actions a {
-  text-transform: uppercase;
-  cursor: pointer;
-  color: #999;
-}
-.post-details textarea {
-  max-width: 100%;
-  min-height: 300px;
-}
-</style>
-
 <section class="post-details">
   <section ng-hide="inEditMode">
     <div class="page-header">
+      <h1>{{ post.title }}</h1>
+
       <div class="actions">
         <a ng-click="inEditMode = !inEditMode">Edit</a>
       </div>
-      <h1>{{ post.title }}</h1>
     </div>
 
-    {{ post.body }}
+    <div class="post-body"
+         btf-markdown="post.body"></div>
   </section>
   <section ng-show="inEditMode">
     <form role="role" name="postForm" ng-submit="saveForm()">

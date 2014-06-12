@@ -2,6 +2,8 @@
 
 var blogApp = angular.module('blog', [
   'ngRoute',
+  'ngSanitize',
+  'btford.markdown',
   'blog.controllers'
 ]).config(['$routeProvider', function($routeProvider) {
   $routeProvider
