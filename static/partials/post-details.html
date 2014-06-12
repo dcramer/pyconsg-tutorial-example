@@ -60,7 +60,7 @@
     {{ post.body }}
   </section>
   <section ng-show="inEditMode">
-    <form role="role" name="postForm">
+    <form role="role" name="postForm" ng-submit="saveForm()">
       <div class="page-header">
         <div class="actions">
           <a ng-click="saveForm()">Save</a>
