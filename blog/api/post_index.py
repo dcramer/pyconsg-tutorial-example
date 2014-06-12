@@ -56,5 +56,6 @@ class PostIndexResource(Resource):
         return {
             'id': post.id,
             'title': post.title,
+            'body': post.body,
             'pubDate': post.pub_date.isoformat(),
         }, 201

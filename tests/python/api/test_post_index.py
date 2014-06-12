@@ -6,7 +6,7 @@ from blog.config import db
 from blog.models import Post
 
 
-def test_post_list(client):
+def test_list(client):
     post1 = Post(
         title='Hello world!',
         body='Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -33,7 +33,7 @@ def test_post_list(client):
     assert data[1]['id'] == post1.id
 
 
-def test_create_post(client):
+def test_create(client):
     title = 'Hello world!'
     body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
 
