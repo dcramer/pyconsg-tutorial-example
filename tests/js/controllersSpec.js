@@ -19,51 +19,6 @@ describe('controllers', function(){
     };
   });
 
-  describe('EditPostCtrl', function(){
-    var $httpBackend, $scope, ctrl;
-
-    beforeEach(inject(function($controller){
-        $scope = {};
-
-        ctrl = $controller('NewPostCtrl', {$scope: $scope});
-    }));
-
-    beforeEach(inject(function($injector){
-       $httpBackend = $injector.get('$httpBackend');
-       $httpBackend.when('POST', '/api/0/posts/').respond(samplePost);
-    }));
-
-    it('should should be defined', function(){
-      expect(ctrl).toBeDefined();
-    });
-
-    it('should should bind formData', function(){
-      expect($scope.formData).toBeDefined();
-    });
-
-    it('should should support saveForm', function(){
-      expect($scope.saveForm).toBeDefined();
-
-      $scope.formData = {
-        title: samplePost.title,
-        body: samplePost.body
-      };
-
-      $httpBackend.expectPOST('/api/0/posts/', $scope.formData)
-        .respond(201, samplePost);
-
-      $scope.saveForm();
-
-      $httpBackend.flush();
-    });
-
-    afterEach(function() {
-      $httpBackend.verifyNoOutstandingExpectation();
-      $httpBackend.verifyNoOutstandingRequest();
-    });
-
-  });
-
   describe('NewPostCtrl', function(){
     var $httpBackend, $scope, ctrl;
 
@@ -110,14 +65,18 @@ describe('controllers', function(){
   });
 
   describe('PostDetailsCtrl', function(){
-    var scope, ctrl;
+    var $httpBackend, $scope, ctrl;
 
-    beforeEach(inject(function($controller){
-        scope = {};
+    beforeEach(inject(function($controller, $injector, $rootScope){
+        $scope = $rootScope.$new();
 
-        ctrl = $controller('PostDetailsCtrl', {$scope: scope, postDetailsResponse: {
-          data: samplePost
-        }});
+        $httpBackend = $injector.get('$httpBackend');
+        $httpBackend.when('POST', '/api/0/posts/').respond(samplePost);
+
+        ctrl = $controller('PostDetailsCtrl', {
+          $scope: $scope,
+          postDetailsResponse: {data: samplePost}
+        });
     }));
 
     it('should should be defined', function(){
@@ -125,7 +84,36 @@ describe('controllers', function(){
     });
 
     it('should should bind post', function(){
-      expect(scope.post).toBe(samplePost);
+      expect($scope.post).toBe(samplePost);
+    });
+
+    it('should should bind isEditMode', function(){
+      expect($scope.inEditMode).toBe(false);
+    });
+
+    it('should should bind formData', function(){
+      expect($scope.formData).toBeDefined();
+    });
+
+    it('should should support saveForm', function(){
+      expect($scope.saveForm).toBeDefined();
+
+      $scope.formData = {
+        title: samplePost.title,
+        body: samplePost.body
+      };
+
+      $httpBackend.expectPOST('/api/0/posts/1/', $scope.formData)
+        .respond(201, samplePost);
+
+      $scope.saveForm();
+
+      $httpBackend.flush();
+    });
+
+    afterEach(function() {
+      $httpBackend.verifyNoOutstandingExpectation();
+      $httpBackend.verifyNoOutstandingRequest();
     });
   });
 
