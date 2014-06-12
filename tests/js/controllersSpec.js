@@ -19,6 +19,20 @@ describe('controllers', function(){
     };
   });
 
+  describe('NewPostCtrl', function(){
+    var scope, ctrl;
+
+    beforeEach(inject(function($controller){
+        scope = {};
+
+        ctrl = $controller('NewPostCtrl', {$scope: scope});
+    }));
+
+    it('should should be defined', function(){
+      expect(ctrl).toBeDefined();
+    });
+  });
+
   describe('PostDetailsCtrl', function(){
     var scope, ctrl;
 

@@ -6,7 +6,7 @@ from blog.config import db
 from blog.models import Post
 
 
-def test_simple(client):
+def test_post_list(client):
     post1 = Post(
         title='Hello world!',
         body='Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -31,3 +31,32 @@ def test_simple(client):
     assert len(data) == 2
     assert data[0]['id'] == post2.id
     assert data[1]['id'] == post1.id
+
+
+def test_create_post(client):
+    title = 'Hello world!'
+    body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+
+    # missing title
+    resp = client.post('/api/0/posts/', data={
+        'body': body,
+    })
+    assert resp.status_code == 400
+
+    # missing body
+    resp = client.post('/api/0/posts/', data={
+        'title': title,
+    })
+    assert resp.status_code == 400
+
+    # valid params
+    resp = client.post('/api/0/posts/', data={
+        'title': title,
+        'body': body,
+    }, follow_redirects=True)
+    assert resp.status_code == 200
+
+    data = json.loads(resp.data.decode('utf-8'))
+
+    assert data['title'] == title
+    assert data['body'] == body

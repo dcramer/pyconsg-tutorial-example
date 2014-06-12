@@ -22,14 +22,13 @@
     <script src="{{ url_for('static', filename='vendor/angular-route/angular-route.js') }}"></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
     <script src="{{ url_for('static', filename='js/controllers.js') }}"></script>
-
   </head>
   <body ng-app="blog">
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <section ng-view>
+    <section class="container" ng-view>
       <div class="loading">
         <div class="spinner-icon spinner-large"></div>
       </div>

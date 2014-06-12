@@ -19,4 +19,17 @@ describe('blog', function() {
 
   });
 
+  describe('new post', function() {
+
+    beforeEach(function() {
+      browser.get('/#/new/post');
+    });
+
+    it('should render the page', function() {
+      expect(element.all(by.css('[ng-view] h1')).first().getText()).
+        toMatch(/New Post/);
+    });
+
+  });
+
 });

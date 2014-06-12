@@ -1,7 +1,12 @@
-<h1>Posts</h1>
+<div class="page-header">
+  <div class="pull-right">
+    <a href="/#/new/post/" class="btn btn-default">New Post</a>
+  </div>
+  <h1>Posts</h1>
+</div>
 
 <ul>
-	<li ng-repeat="post in postList">
-		<h2><a href="/#/posts/{{ post.id }}">{{ post.title }}</a></h2>
-	</li>
+  <li ng-repeat="post in postList">
+    <a href="/#/posts/{{ post.id }}">{{ post.title }}</a>
+  </li>
 </ul>

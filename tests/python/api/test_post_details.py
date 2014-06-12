@@ -15,6 +15,7 @@ def test_valid_post(client):
     resp = client.get('/api/0/posts/{0}/'.format(post.id))
 
     assert resp.status_code == 200
+    assert resp.headers['Content-Type'] == 'application/json', resp.data
     assert json.loads(resp.data.decode('utf-8')) == {
         'id': post.id,
         'title': post.title,
