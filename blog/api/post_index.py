@@ -1,7 +1,8 @@
 from __future__ import absolute_import, division, unicode_literals
 
-from flask.ext.restful import reqparse, Resource
+from flask.ext.restful import reqparse
 
+from blog.api.base import Resource
 from blog.config import db
 from blog.models import Post
 
