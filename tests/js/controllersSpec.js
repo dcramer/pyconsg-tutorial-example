@@ -31,7 +31,7 @@ describe('controllers', function(){
     beforeEach(inject(function($injector){
        $httpBackend = $injector.get('$httpBackend');
        $httpBackend.when('POST', '/api/0/posts/').respond(samplePost);
-    }))
+    }));
 
     it('should should be defined', function(){
       expect(ctrl).toBeDefined();
