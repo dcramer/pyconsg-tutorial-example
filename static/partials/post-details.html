@@ -1,3 +1,8 @@
-<h1>{{ post.title }}</h1>
+<div class="page-header">
+	<div class="pull-right">
+		<a href="/#/posts/{{ post.id }}/edit" class="btn btn-default">Edit Post</a>
+	</div>
+	<h1>{{ post.title }}</h1>
+</div>
 
 {{ post.body }}

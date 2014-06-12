@@ -23,6 +23,15 @@ var blogApp = angular.module('blog', [
         }
       }
     })
+    .when('/posts/:post_id/edit', {
+      templateUrl: 'edit-post.html',
+      controller: 'EditPostCtrl',
+      resolve: {
+        postDetailsResponse: function($http, $route) {
+          return $http.get('/api/0/posts/' + $route.current.params.post_id + '/');
+        }
+      }
+    })
     .when('/new/post', {
       templateUrl: 'new-post.html',
       controller: 'NewPostCtrl'
