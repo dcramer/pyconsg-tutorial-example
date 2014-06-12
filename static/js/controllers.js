@@ -17,17 +17,17 @@ angular.module('blog.controllers', ['ngRoute'])
     $scope.postList = postListResponse.data;
   })
   .controller('PostDetailsCtrl', function($http, $scope, postDetailsResponse){
-    $scope.formData = {};
-    $scope.inEditMode = false;
-    $scope.inSaveMode = false;
-    $scope.$watch('post', function(post){
-      $scope.formData = {
+    var getFormData = function(post) {
+      return {
         title: post.title,
         body: post.body
-      }
-    })
+      };
+    };
 
+    $scope.inEditMode = false;
+    $scope.inSaveMode = false;
     $scope.post = postDetailsResponse.data;
+    $scope.formData = getFormData($scope.post);
 
     $scope.saveForm = function(){
       $scope.inSaveMode = true;
@@ -37,6 +37,7 @@ angular.module('blog.controllers', ['ngRoute'])
         data: $scope.formData
       }).success(function(data){
         $scope.post = data;
+        $scope.formData = getFormData(data);
         $scope.inEditMode = false;
       }).error(function(){
         alert('We hit an issue trying to save your changes.');
