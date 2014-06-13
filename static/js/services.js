@@ -6,27 +6,49 @@ angular.module('blog.services', [
 ]);
 
 angular.module('blog.services.loadingIndicator', [])
-  .config(function($provide){
-    // Create generic loading indicator
-    // http://stackoverflow.com/questions/17494732/how-to-make-a-loading-indicator-for-every-asynchronous-action-using-q-in-an-a
-    $provide.decorator('$q', function($delegate, $rootScope) {
-      var pendingPromisses = 0;
-      $rootScope.$watch(
-        function() { return pendingPromisses > 0; },
-        function(loading) { $rootScope.loading = loading; }
-      );
-      var $q = $delegate;
-      var origDefer = $q.defer;
-      $q.defer = function() {
-        var defer = origDefer();
-        pendingPromisses++;
-        defer.promise.finally(function() {
-          pendingPromisses--;
-        });
-        return defer;
+  .config(function($httpProvider){
+    var interceptor = function($rootScope) {
+      var reqsTotal = 0;
+      var reqsCompleted = 0;
+
+      return {
+        request: function(config) {
+          // Check to make sure this request hasn't already been cached and that
+          // the requester didn't explicitly ask us to ignore this request:
+          $rootScope.loading = true;
+          reqsTotal++;
+          return config;
+        },
+
+        response: function(response) {
+          reqsCompleted++;
+          if (reqsCompleted >= reqsTotal) {
+            $rootScope.loading = false;
+          }
+          return response;
+        },
+
+        responseError: function(rejection) {
+          reqsCompleted++;
+          if (reqsCompleted >= reqsTotal) {
+            $rootScope.loading = false;
+          }
+          return $q.reject(rejection);
+        }
       };
-      return $q;
-    });
+    };
+
+    $httpProvider.interceptors.push(interceptor);
+
+    // TODO:
+    // bind a simple route error handler
+    // $rootScope.$on("$routeChangeStart", function(){
+    //   $rootScope.loadingError = false;
+    // });
+
+    // $rootScope.$on("$routeChangeError", function(){
+    //   $rootScope.loadingError = true;
+    // });
   });
 
 angular.module('blog.services.api', [])
