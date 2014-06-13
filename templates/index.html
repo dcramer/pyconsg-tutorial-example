@@ -8,9 +8,7 @@
     {% if SENTRY_PUBLIC_DSN %}
       <script type="text/javascript" src="//cdn.ravenjs.com/1.1.15/angular,jquery,native/raven.min.js"></script>
       <script type="text/javascript">
-      Raven.config('{{ SENTRY_PUBLIC_DSN }}', {
-        // whitelistUrls: [/changes\.build\.itc\.dropbox\.com/]
-      }).install();
+      Raven.config('{{ SENTRY_PUBLIC_DSN }}').install();
       </script>
     {% endif %}
     <link href="{{ url_for('static', filename='favicon.ico') }}" rel="shortcut icon" type="image/x-icon">
@@ -22,10 +20,12 @@
     <script src="{{ url_for('static', filename='vendor/angular-route/angular-route.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/angular-sanitize/angular-sanitize.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/angular-markdown-directive/markdown.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/moment/min/moment.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/showdown/compressed/showdown.js') }}"></script>
 
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
     <script src="{{ url_for('static', filename='js/controllers.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/directives.js') }}"></script>
     <script src="{{ url_for('static', filename='js/services.js') }}"></script>
   </head>
   <body ng-app="blog">
@@ -40,9 +40,14 @@
         <div class="loading" ng-show="loading">
           <div class="spinner-icon"></div>
         </div>
+        <div class="loading" ng-show="loadingError">
+          <span class="glyphicon glyphicon-exclamation-sign"></span>
+        </div>
       </header>
 
       <section ng-view></section>
+
+      <footer><a href="https://github.com/dcramer/pyconsg-tutorial">Source</a></footer>
     </section>
   </body>
 </html>

@@ -1,12 +1,14 @@
-<div class="page-header">
-  <div class="pull-right">
-    <a href="/#/new/post/" class="btn btn-default">New Post</a>
-  </div>
-  <h1>Posts</h1>
-</div>
+<p><a href="/#/new/post/" class="btn btn-default">New Post</a></p>
 
-<ul>
-  <li ng-repeat="post in postList">
-    <a href="/#/posts/{{ post.id }}">{{ post.title }}</a>
-  </li>
-</ul>
+<div ng-repeat="post in postList">
+  <div class="page-header">
+    <h2>
+      <a href="/#/posts/{{ post.id }}">{{ post.title }}</a>
+      <small>&mdash; <span time-since="post.pubDate"></span></small>
+    </h2>
+  </div>
+
+  <div class="post-body"
+     btf-markdown="post.body"></div>
+
+</div>

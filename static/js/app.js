@@ -6,6 +6,7 @@ var blogApp = angular.module('blog', [
   'ngSanitize',
 
   'blog.controllers',
+  'blog.directives',
   'blog.services'
 ]).config(function($provide, $routeProvider) {
   // wire up routes
@@ -31,5 +32,6 @@ var blogApp = angular.module('blog', [
     .when('/new/post', {
       templateUrl: 'new-post.html',
       controller: 'NewPostCtrl'
-    });
+    })
+    .otherwise("/");
 });

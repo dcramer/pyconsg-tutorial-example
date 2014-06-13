@@ -2,8 +2,37 @@ h1, h2 {
   font-weight: 300;
 }
 
-header h1 {
+h1 {
   font-size: 30px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+header {
+  position: relative;
+}
+
+header .loading {
+  position: absolute;
+  text-align: center;
+  top: 0;
+  right: 0;
+  font-size: 26px;
+  color: #aaa;
+}
+
+header .loading .spinner-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 32px;
+}
+
+footer {
+  padding: 50px;
+  text-align: center;
+  font-size: 12px;
 }
 
 .container {
@@ -71,15 +100,6 @@ header h1 {
 }
 
 
-.loading {
-  position: absolute;
-  margin: 0 auto;
-  text-align: center;
-  padding: 20px;
-  top: 0;
-  right: 0;
-}
-
 .spinner-icon {
   width: 14px;
   height: 14px;
@@ -96,12 +116,6 @@ header h1 {
   -ms-animation:     loading-bar-spinner 600ms linear infinite;
   -o-animation:      loading-bar-spinner 600ms linear infinite;
   animation:         loading-bar-spinner 600ms linear infinite;
-}
-
-.loading .spinner-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 32px;
 }
 
 @-webkit-keyframes loading-bar-spinner {
