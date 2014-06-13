@@ -6,7 +6,10 @@ module.exports = function(config){
     files: [
       'static/vendor/angular/angular.js',
       'static/vendor/angular-route/angular-route.js',
+      'static/vendor/angular-sanitize/angular-sanitize.js',
       'static/vendor/angular-mocks/angular-mocks.js',
+      'static/vendor/angular-markdown-directive/markdown.js',
+      'static/vendor/showdown/compressed/showdown.js',
       'static/js/**/*.js',
       'tests/js/**/*.js'
     ],

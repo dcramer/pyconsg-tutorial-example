@@ -1,10 +1,12 @@
 'use strict';
 
 var blogApp = angular.module('blog', [
+  'btford.markdown',
   'ngRoute',
   'ngSanitize',
-  'btford.markdown',
-  'blog.controllers'
+
+  'blog.controllers',
+  'blog.services'
 ]).config(function($provide, $routeProvider) {
   // wire up routes
   $routeProvider
@@ -12,8 +14,8 @@ var blogApp = angular.module('blog', [
       templateUrl: 'post-list.html',
       controller: 'PostListCtrl',
       resolve: {
-        postListResponse: function($http) {
-          return $http.get('/api/0/posts/');
+        postListResponse: function(api) {
+          return api.listPosts();
         }
       }
     })
@@ -21,8 +23,8 @@ var blogApp = angular.module('blog', [
       templateUrl: 'post-details.html',
       controller: 'PostDetailsCtrl',
       resolve: {
-        postDetailsResponse: function($http, $route) {
-          return $http.get('/api/0/posts/' + $route.current.params.post_id + '/');
+        postDetailsResponse: function($route, api) {
+          return api.getPost($route.current.params.post_id);
         }
       }
     })
@@ -30,25 +32,4 @@ var blogApp = angular.module('blog', [
       templateUrl: 'new-post.html',
       controller: 'NewPostCtrl'
     });
-
-  // Create generic loading indicator
-  // http://stackoverflow.com/questions/17494732/how-to-make-a-loading-indicator-for-every-asynchronous-action-using-q-in-an-a
-  $provide.decorator('$q', function($delegate, $rootScope) {
-    var pendingPromisses = 0;
-    $rootScope.$watch(
-      function() { return pendingPromisses > 0; },
-      function(loading) { $rootScope.loading = loading; }
-    );
-    var $q = $delegate;
-    var origDefer = $q.defer;
-    $q.defer = function() {
-      var defer = origDefer();
-      pendingPromisses++;
-      defer.promise.finally(function() {
-        pendingPromisses--;
-      });
-      return defer;
-    };
-    return $q;
-  });
 });

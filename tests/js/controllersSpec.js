@@ -4,6 +4,7 @@ describe('controllers', function(){
   var samplePost, samplePost2;
 
   beforeEach(module('blog.controllers'));
+  beforeEach(module('blog.services.api'));
 
   beforeEach(function(){
     samplePost = {
@@ -22,10 +23,12 @@ describe('controllers', function(){
   describe('NewPostCtrl', function(){
     var $httpBackend, $scope, ctrl;
 
-    beforeEach(inject(function($controller){
-        $scope = {};
+    beforeEach(inject(function($controller, $rootScope){
+        $scope = $rootScope.$new();
 
-        ctrl = $controller('NewPostCtrl', {$scope: $scope});
+        ctrl = $controller('NewPostCtrl', {
+          $scope: $scope
+        });
     }));
 
     beforeEach(inject(function($injector){
@@ -68,10 +71,10 @@ describe('controllers', function(){
     var $httpBackend, $scope, ctrl;
 
     beforeEach(inject(function($controller, $injector, $rootScope){
-        $scope = $rootScope.$new();
-
         $httpBackend = $injector.get('$httpBackend');
         $httpBackend.when('POST', '/api/0/posts/').respond(samplePost);
+
+        $scope = $rootScope.$new();
 
         ctrl = $controller('PostDetailsCtrl', {
           $scope: $scope,
@@ -118,14 +121,17 @@ describe('controllers', function(){
   });
 
   describe('PostListCtrl', function(){
-    var scope, ctrl;
+    var $scope, ctrl;
 
-    beforeEach(inject(function($controller){
-        scope = {};
+    beforeEach(inject(function($controller, $rootScope){
+        $scope = $rootScope.$new();
 
-        ctrl = $controller('PostListCtrl', {$scope: scope, postListResponse: {
-          data: [samplePost, samplePost2]
-        }});
+        ctrl = $controller('PostListCtrl', {
+          $scope: $scope,
+          postListResponse: {
+            data: [samplePost, samplePost2]
+          }
+        });
     }));
 
     it('should should be defined', function(){
@@ -133,9 +139,9 @@ describe('controllers', function(){
     });
 
     it('should should bind postList', function(){
-      expect(scope.postList.length).toBe(2);
-      expect(scope.postList[0].id).toBe(samplePost.id);
-      expect(scope.postList[1].id).toBe(samplePost2.id);
+      expect($scope.postList.length).toBe(2);
+      expect($scope.postList[0].id).toBe(samplePost.id);
+      expect($scope.postList[1].id).toBe(samplePost2.id);
     });
   });
 
