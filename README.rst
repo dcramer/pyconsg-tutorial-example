@@ -3,7 +3,15 @@ Setup the environment:
 ::
 
 	mkvirtualenv -p `which python3` pyconsg-tutorial
+
+
+Install dependencies:
+
+::
+
 	pip install -e .
+	npm install
+	bower install
 
 
 Initialize the database:
