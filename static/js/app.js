@@ -8,7 +8,7 @@ var blogApp = angular.module('blog', [
   'blog.controllers',
   'blog.directives',
   'blog.services'
-]).config(function($provide, $routeProvider) {
+]).config(function($routeProvider) {
   // wire up routes
   $routeProvider
     .when('/', {

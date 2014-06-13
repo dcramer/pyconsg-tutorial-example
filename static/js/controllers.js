@@ -6,7 +6,7 @@ angular.module('blog.controllers', [
   'blog.controllers.postList'
 ]);
 
-angular.module('blog.controllers.newPost', ['ngRoute'])
+angular.module('blog.controllers.newPost', [])
   .controller('NewPostCtrl', function($location, $scope, api){
     $scope.formData = {};
 
@@ -18,7 +18,7 @@ angular.module('blog.controllers.newPost', ['ngRoute'])
     }
   });
 
-angular.module('blog.controllers.postDetails', ['ngRoute'])
+angular.module('blog.controllers.postDetails', [])
   .controller('PostDetailsCtrl', function($http, $scope, api, postDetailsResponse){
     var getFormData = function(post) {
       return {
@@ -55,7 +55,7 @@ angular.module('blog.controllers.postDetails', ['ngRoute'])
   });
 
 
-angular.module('blog.controllers.postList', ['ngRoute'])
+angular.module('blog.controllers.postList', [])
   .controller('PostListCtrl', function($scope, postListResponse){
     $scope.postList = postListResponse.data;
   });
