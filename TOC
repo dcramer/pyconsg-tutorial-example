@@ -12,6 +12,10 @@ Features:
 
 ##
 
+- what can you build
+
+##
+
 - intro to bower
 - basic framework (static media, angular config)
 - basic deps (bootstrap/angular)
