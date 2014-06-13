@@ -1,6 +1,12 @@
 'use strict';
 
-angular.module('blog.controllers', ['ngRoute'])
+angular.module('blog.controllers', [
+  'blog.controllers.newPost',
+  'blog.controllers.postDetails',
+  'blog.controllers.postList'
+]);
+
+angular.module('blog.controllers.newPost', ['ngRoute'])
   .controller('NewPostCtrl', function($location, $scope, api){
     $scope.formData = {};
 
@@ -10,10 +16,9 @@ angular.module('blog.controllers', ['ngRoute'])
           $location.path('/posts/' + data.id);
         });
     }
-  })
-  .controller('PostListCtrl', function($scope, postListResponse){
-    $scope.postList = postListResponse.data;
-  })
+  });
+
+angular.module('blog.controllers.postDetails', ['ngRoute'])
   .controller('PostDetailsCtrl', function($http, $scope, api, postDetailsResponse){
     var getFormData = function(post) {
       return {
@@ -47,4 +52,10 @@ angular.module('blog.controllers', ['ngRoute'])
           $scope.inSaveMode = false;
         });
     }
+  });
+
+
+angular.module('blog.controllers.postList', ['ngRoute'])
+  .controller('PostListCtrl', function($scope, postListResponse){
+    $scope.postList = postListResponse.data;
   });
