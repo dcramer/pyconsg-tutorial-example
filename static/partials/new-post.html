@@ -14,15 +14,15 @@
               ng-model="formData.body"
               placeholder="Post Body"
               class="form-control"
-              ng-class="{error: !postForm.body.$valid}">
+              ng-class="{error: !postForm.body.$valid}"
               required></textarea>
     </div>
 
-  <div class="form-actions">
-    <button class="btn btn-primary"
-            ng-click="saveForm()"
-            ng-disabled="postForm.$invalid || postForm.$pristine">Publish</button>
-  </div>
+    <div class="form-actions">
+      <button class="btn btn-primary"
+              ng-click="saveForm()"
+              ng-disabled="postForm.$invalid || postForm.$pristine">Publish</button>
+    </div>
 
   </form>
 </section>

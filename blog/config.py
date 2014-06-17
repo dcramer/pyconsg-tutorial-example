@@ -10,6 +10,9 @@ from sqlalchemy.exc import SAWarning
 
 from blog.constants import PROJECT_ROOT
 
+import blog.models
+
+
 # ensure sqlalchemy warnings bubble up to errors
 warnings.simplefilter('error', SAWarning)
 

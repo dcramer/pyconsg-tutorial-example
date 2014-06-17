@@ -49,8 +49,8 @@ class PostIndexResource(Resource):
         args = self.post_parser.parse_args()
 
         post = Post(
-            title=args.title,
-            body=args.body,
+            title=request.form['title'],
+            body=request.form['body'],
         )
         db.session.add(post)
         db.session.commit()
